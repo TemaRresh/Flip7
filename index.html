@@ -13,16 +13,15 @@
     :root {
       --bg: #0b1020;
       --panel: #151d31;
-      --panel-2: #1c2740;
+      --panel2: #1c2740;
       --text: #f7f8fb;
       --muted: #9ba7bd;
       --accent: #ffb32c;
-      --accent-2: #ffca63;
+      --accent2: #ffca63;
       --danger: #ff6b6b;
       --border: rgba(255,255,255,.09);
       --shadow: 0 18px 50px rgba(0,0,0,.24);
     }
-
     * { box-sizing: border-box; }
     html { background: var(--bg); }
     body {
@@ -37,302 +36,174 @@
       -webkit-font-smoothing: antialiased;
       padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
     }
-
     button, input, select { font: inherit; }
     button { -webkit-tap-highlight-color: transparent; }
-
     .app {
       width: min(760px, 100%);
       margin: 0 auto;
-      padding: 22px 16px 40px;
+      padding: 18px 14px calc(98px + env(safe-area-inset-bottom));
     }
-
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
       margin-bottom: 18px;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .brand { display: flex; align-items: center; gap: 12px; }
     .logo {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
+      width: 48px; height: 48px; display: grid; place-items: center;
       border-radius: 15px;
-      background: linear-gradient(145deg, var(--accent-2), var(--accent));
-      color: #231600;
-      font-size: 27px;
+      background: linear-gradient(145deg, var(--accent2), var(--accent));
+      color: #241700; font-size: 27px; font-weight: 900;
       box-shadow: 0 10px 24px rgba(255,179,44,.22);
     }
-
-    h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: -.03em;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
+    h1 { margin: 0; font-size: 27px; letter-spacing: -.03em; }
+    h2 { margin: 0; font-size: 20px; }
+    h3 { margin: 0 0 14px; font-size: 22px; }
+    .subtitle { color: var(--muted); font-size: 13px; margin-top: 2px; }
     .icon-btn {
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      font-size: 20px;
+      width: 44px; height: 44px; border: 1px solid var(--border);
+      border-radius: 14px; background: rgba(255,255,255,.04);
+      color: var(--text); font-size: 20px;
     }
-
+    .screen { display: none; }
+    .screen.active { display: block; }
     .players {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 14px;
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px; margin-bottom: 14px;
     }
-
     .player {
-      position: relative;
-      overflow: hidden;
-      min-height: 142px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
-      box-shadow: var(--shadow);
-      padding: 16px;
+      position: relative; overflow: hidden; min-height: 162px;
+      border: 1px solid var(--border); border-radius: 22px;
+      background: linear-gradient(160deg, color-mix(in srgb, var(--player) 16%, transparent), rgba(255,255,255,.025));
+      box-shadow: var(--shadow); padding: 15px;
     }
-
-    .player.leader {
-      border-color: rgba(255,179,44,.5);
-      background: linear-gradient(160deg, rgba(255,179,44,.18), rgba(255,255,255,.035));
+    .player.leader { border-color: color-mix(in srgb, var(--player) 75%, white 10%); }
+    .player-head { display: flex; gap: 8px; align-items: center; padding-right: 34px; }
+    .avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 20px;
+      background: color-mix(in srgb, var(--player) 24%, transparent);
+      border: 1px solid color-mix(in srgb, var(--player) 55%, transparent);
     }
-
     .player-name {
-      width: 100%;
-      border: 0;
-      outline: 0;
-      padding: 0;
-      background: transparent;
-      color: var(--text);
-      font-size: 17px;
-      font-weight: 700;
+      width: 100%; border: 0; outline: 0; padding: 0;
+      background: transparent; color: var(--text); font-size: 17px; font-weight: 750;
     }
-
-    .player-score {
-      font-size: 50px;
-      font-weight: 800;
-      letter-spacing: -.05em;
-      margin-top: 13px;
+    .player-score { font-size: 48px; font-weight: 850; letter-spacing: -.05em; margin-top: 12px; }
+    .player-meta { color: var(--muted); font-size: 12px; line-height: 1.4; margin-top: 2px; }
+    .crown { position: absolute; right: 13px; top: 13px; font-size: 22px; }
+    .last-round { margin-top: 8px; font-size: 13px; font-weight: 700; }
+    .primary, .secondary, .danger {
+      border-radius: 16px; padding: 15px 16px; font-weight: 800;
     }
-
-    .player-meta {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .crown {
-      position: absolute;
-      right: 14px;
-      top: 14px;
-      font-size: 22px;
-    }
-
     .primary {
-      width: 100%;
-      border: 0;
-      border-radius: 18px;
-      padding: 17px 18px;
-      color: #271800;
-      background: linear-gradient(180deg, var(--accent-2), var(--accent));
-      font-size: 18px;
-      font-weight: 800;
+      width: 100%; border: 0; color: #271800;
+      background: linear-gradient(180deg, var(--accent2), var(--accent));
       box-shadow: 0 12px 26px rgba(255,179,44,.2);
     }
-
-    .primary:active { transform: scale(.99); }
-
-    .section {
-      margin-top: 24px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .section h2 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .round-list {
-      display: grid;
-      gap: 9px;
-    }
-
-    .round {
-      display: grid;
-      grid-template-columns: 70px 1fr auto;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(255,255,255,.035);
-      padding: 12px;
-    }
-
-    .round-title {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .round-values {
-      display: grid;
-      grid-template-columns: repeat(var(--count), minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .round-value {
-      text-align: center;
-      font-weight: 750;
-    }
-
-    .small-btn {
-      border: 0;
-      border-radius: 11px;
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      padding: 8px 10px;
-    }
-
-    .empty {
-      color: var(--muted);
-      text-align: center;
-      padding: 28px 16px;
-      border: 1px dashed var(--border);
-      border-radius: 18px;
-    }
-
-    dialog {
-      width: min(560px, calc(100% - 24px));
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      color: var(--text);
-      background: #151d31;
-      box-shadow: 0 28px 80px rgba(0,0,0,.5);
-      padding: 0;
-    }
-
-    dialog::backdrop {
-      background: rgba(3,7,18,.72);
-      backdrop-filter: blur(7px);
-    }
-
-    .modal {
-      padding: 20px;
-    }
-
-    .modal h3 {
-      margin: 0 0 16px;
-      font-size: 22px;
-    }
-
-    .score-fields {
-      display: grid;
-      gap: 10px;
-    }
-
-    .score-row {
-      display: grid;
-      grid-template-columns: 1fr 120px;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .score-row label {
-      font-weight: 700;
-    }
-
-    .score-row input,
-    .settings-row input,
-    .settings-row select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      padding: 12px;
-      font-size: 18px;
-      outline: none;
-    }
-
-    .modal-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
     .secondary, .danger {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 14px;
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-weight: 700;
+      border: 1px solid var(--border); background: rgba(255,255,255,.05); color: var(--text);
     }
-
     .danger { color: var(--danger); }
-
-    .settings-row {
-      display: grid;
-      gap: 7px;
-      margin-bottom: 14px;
+    .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .section { margin-top: 24px; }
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin-bottom: 10px;
     }
-
-    .settings-row label {
-      color: var(--muted);
-      font-size: 13px;
+    .round-list, .history-list, .league-list { display: grid; gap: 9px; }
+    .round, .history-card, .league-row {
+      border: 1px solid var(--border); border-radius: 17px;
+      background: rgba(255,255,255,.035); padding: 12px;
     }
-
+    .round {
+      display: grid; grid-template-columns: 62px 1fr auto;
+      align-items: center; gap: 8px;
+    }
+    .round-title { color: var(--muted); font-size: 12px; }
+    .round-values {
+      display: grid; grid-template-columns: repeat(var(--count), minmax(0, 1fr)); gap: 5px;
+    }
+    .round-value { text-align: center; font-weight: 750; font-size: 14px; }
+    .small-btn {
+      border: 0; border-radius: 11px; background: rgba(255,255,255,.07);
+      color: var(--text); padding: 8px 10px;
+    }
+    .empty {
+      color: var(--muted); text-align: center; padding: 28px 16px;
+      border: 1px dashed var(--border); border-radius: 18px;
+    }
+    .tabs {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: 0; z-index: 20; width: min(760px, 100%);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(11,16,32,.88); backdrop-filter: blur(18px);
+      border-top: 1px solid var(--border);
+    }
+    .tab {
+      border: 0; border-radius: 14px; padding: 12px;
+      background: transparent; color: var(--muted); font-weight: 800;
+    }
+    .tab.active { background: rgba(255,179,44,.14); color: var(--accent2); }
+    dialog {
+      width: min(560px, calc(100% - 24px)); border: 1px solid var(--border);
+      border-radius: 24px; color: var(--text); background: #151d31;
+      box-shadow: 0 28px 80px rgba(0,0,0,.5); padding: 0;
+    }
+    dialog::backdrop { background: rgba(3,7,18,.74); backdrop-filter: blur(7px); }
+    .modal { padding: 20px; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .score-fields, .settings-grid { display: grid; gap: 10px; }
+    .score-row, .settings-row { display: grid; gap: 7px; }
+    .score-row { grid-template-columns: 1fr 115px; align-items: center; }
+    .score-row label { font-weight: 750; }
+    .score-row input, .settings-row input, .settings-row select {
+      width: 100%; border: 1px solid var(--border); border-radius: 13px;
+      background: rgba(255,255,255,.06); color: var(--text);
+      padding: 12px; font-size: 17px; outline: none;
+    }
+    .settings-row label { color: var(--muted); font-size: 13px; }
+    .player-settings {
+      display: grid; grid-template-columns: 54px 1fr 78px; gap: 8px; align-items: center;
+      padding: 10px; border: 1px solid var(--border); border-radius: 16px;
+    }
+    .player-settings input[type="checkbox"] { width: 20px; height: 20px; }
+    .player-settings input[type="text"], .player-settings select {
+      width: 100%; border: 1px solid var(--border); border-radius: 11px;
+      background: rgba(255,255,255,.05); color: var(--text); padding: 10px;
+    }
+    .league-row {
+      display: grid; grid-template-columns: 42px 1fr 70px 62px; gap: 8px; align-items: center;
+    }
+    .rank { font-size: 20px; font-weight: 900; text-align: center; }
+    .league-name { font-weight: 800; }
+    .league-sub { color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .league-pct { font-size: 19px; font-weight: 900; text-align: right; }
+    .league-wins { color: var(--muted); font-size: 12px; text-align: right; }
+    .history-card button {
+      width: 100%; border: 0; background: transparent; color: inherit; text-align: left; padding: 0;
+    }
+    .history-title { font-weight: 850; }
+    .history-meta { color: var(--muted); font-size: 12px; margin-top: 5px; }
     .winner {
-      margin: 14px 0;
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255,179,44,.13);
-      border: 1px solid rgba(255,179,44,.35);
-      text-align: center;
+      padding: 18px; border-radius: 18px; text-align: center;
+      background: rgba(255,179,44,.13); border: 1px solid rgba(255,179,44,.35);
     }
-
-    .winner strong {
-      display: block;
-      font-size: 26px;
-      margin-top: 5px;
+    .winner strong { display: block; font-size: 28px; margin: 6px 0; }
+    .badge {
+      display: inline-block; padding: 4px 8px; border-radius: 999px;
+      background: rgba(255,255,255,.07); color: var(--muted); font-size: 11px;
     }
-
     @media (max-width: 430px) {
-      .app { padding-left: 12px; padding-right: 12px; }
-      h1 { font-size: 25px; }
-      .players { gap: 9px; }
-      .player { min-height: 132px; padding: 14px; }
-      .player-score { font-size: 44px; }
-      .score-row { grid-template-columns: 1fr 105px; }
-      .round { grid-template-columns: 54px 1fr auto; }
+      .app { padding-left: 11px; padding-right: 11px; }
+      h1 { font-size: 24px; }
+      .player { min-height: 154px; padding: 13px; }
+      .player-score { font-size: 43px; }
+      .score-row { grid-template-columns: 1fr 100px; }
+      .league-row { grid-template-columns: 36px 1fr 62px 52px; }
     }
   </style>
 </head>
@@ -349,18 +220,46 @@
       <button class="icon-btn" id="settingsBtn" type="button" aria-label="Настройки">⚙️</button>
     </header>
 
-    <section class="players" id="players"></section>
-
-    <button class="primary" id="addRoundBtn" type="button">＋ Добавить раунд</button>
-
-    <section class="section">
-      <div class="section-head">
-        <h2>Раунды</h2>
-        <span class="subtitle" id="roundCount">0 раундов</span>
+    <section class="screen active" id="gameScreen">
+      <section class="players" id="players"></section>
+      <button class="primary" id="addRoundBtn" type="button">＋ Добавить раунд</button>
+      <div class="button-row">
+        <button class="secondary" id="undoBtn" type="button">↶ Отменить раунд</button>
+        <button class="secondary" id="finishBtn" type="button">🏁 Завершить игру</button>
       </div>
-      <div class="round-list" id="roundList"></div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Раунды</h2>
+          <span class="subtitle" id="roundCount">0 раундов</span>
+        </div>
+        <div class="round-list" id="roundList"></div>
+      </section>
+    </section>
+
+    <section class="screen" id="leagueScreen">
+      <section class="section" style="margin-top:0">
+        <div class="section-head">
+          <h2>Лига</h2>
+          <span class="badge">по % побед</span>
+        </div>
+        <div class="league-list" id="leagueList"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>История партий</h2>
+          <span class="subtitle" id="gamesCount"></span>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
     </section>
   </main>
+
+  <nav class="tabs">
+    <button class="tab active" data-screen="gameScreen" type="button">🎲 Игра</button>
+    <button class="tab" data-screen="leagueScreen" type="button">🏆 Лига</button>
+  </nav>
 
   <dialog id="roundDialog">
     <div class="modal">
@@ -370,25 +269,20 @@
         <button class="secondary" id="cancelRoundBtn" type="button">Отмена</button>
         <button class="primary" id="saveRoundBtn" type="button">Сохранить</button>
       </div>
+      <button class="danger" id="deleteRoundBtn" type="button" style="width:100%;margin-top:10px;display:none">Удалить раунд</button>
     </div>
   </dialog>
 
   <dialog id="settingsDialog">
     <div class="modal">
-      <h3>Настройки</h3>
-      <div class="settings-row">
-        <label for="playerCount">Количество игроков</label>
-        <select id="playerCount">
-          <option value="3">3 игрока</option>
-          <option value="4">4 игрока</option>
-        </select>
-      </div>
-      <div class="settings-row">
+      <h3>Игроки и партия</h3>
+      <div class="settings-grid" id="playerSettings"></div>
+      <div class="settings-row" style="margin-top:14px">
         <label for="targetScore">Победа при</label>
         <input id="targetScore" type="number" inputmode="numeric" min="1" value="200">
       </div>
       <div class="modal-actions">
-        <button class="danger" id="newGameBtn" type="button">Новая партия</button>
+        <button class="danger" id="resetAllBtn" type="button">Сбросить всё</button>
         <button class="primary" id="closeSettingsBtn" type="button">Готово</button>
       </div>
     </div>
@@ -401,42 +295,100 @@
         <strong id="winnerName"></strong>
         <span id="winnerScore"></span>
       </div>
-      <button class="primary" id="winnerCloseBtn" type="button">Продолжить</button>
+      <div class="modal-actions">
+        <button class="secondary" id="continueBtn" type="button">Продолжить</button>
+        <button class="primary" id="saveGameBtn" type="button">Сохранить партию</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="historyDialog">
+    <div class="modal">
+      <h3 id="historyDialogTitle">Партия</h3>
+      <div id="historyDialogBody"></div>
+      <button class="primary" id="closeHistoryBtn" type="button" style="margin-top:16px">Закрыть</button>
     </div>
   </dialog>
 
   <script>
-    const STORAGE_KEY = "flip7-score-v2";
+    const STORAGE_KEY = "flip7-score-v3";
+    const legacyKey = "flip7-score-v2";
 
-    const defaultState = () => ({
-      target: 200,
-      players: [
-        { name: "Артём" },
-        { name: "Маша" },
-        { name: "Роберт" },
-        { name: "Агата" }
-      ],
-      rounds: []
-    });
+    const COLORS = ["#ffb32c","#6ea8ff","#8bd17c","#d78cff","#ff7d7d","#54d2d2"];
+    const AVATARS = ["🦊","🐼","🦈","🦄","🐯","🐸","🐧","🦁"];
 
-    let state;
-    let editingRound = null;
-
-    try {
-      state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState();
-    } catch {
-      state = defaultState();
+    function freshState() {
+      return {
+        target: 200,
+        roster: [
+          { id: crypto.randomUUID(), name: "Артём", avatar: "🦊", color: COLORS[0], active: true },
+          { id: crypto.randomUUID(), name: "Маша", avatar: "🐼", color: COLORS[1], active: true },
+          { id: crypto.randomUUID(), name: "Роберт", avatar: "🦈", color: COLORS[2], active: true },
+          { id: crypto.randomUUID(), name: "Агата", avatar: "🦄", color: COLORS[3], active: true }
+        ],
+        current: { rounds: [], winnerShown: false },
+        history: []
+      };
     }
 
+    let state = loadState();
+    let editingRound = null;
+
     const $ = id => document.getElementById(id);
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved) return normalizeState(saved);
+
+        const old = JSON.parse(localStorage.getItem(legacyKey));
+        if (old) {
+          return normalizeState({
+            target: old.target || 200,
+            roster: (old.players || []).map((p, i) => ({
+              id: crypto.randomUUID(),
+              name: p.name || `Игрок ${i + 1}`,
+              avatar: AVATARS[i] || "🙂",
+              color: COLORS[i] || COLORS[0],
+              active: true
+            })),
+            current: { rounds: old.rounds || [], winnerShown: false },
+            history: []
+          });
+        }
+      } catch {}
+      return freshState();
+    }
+
+    function normalizeState(value) {
+      const base = freshState();
+      value.target = Number(value.target || 200);
+      value.roster = Array.isArray(value.roster) && value.roster.length ? value.roster : base.roster;
+      value.roster = value.roster.map((p, i) => ({
+        id: p.id || crypto.randomUUID(),
+        name: p.name || `Игрок ${i + 1}`,
+        avatar: p.avatar || AVATARS[i] || "🙂",
+        color: p.color || COLORS[i % COLORS.length],
+        active: p.active !== false
+      }));
+      value.current = value.current || { rounds: [], winnerShown: false };
+      value.current.rounds = Array.isArray(value.current.rounds) ? value.current.rounds : [];
+      value.history = Array.isArray(value.history) ? value.history : [];
+      return value;
+    }
 
     function save() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    function totals() {
-      return state.players.map((_, playerIndex) =>
-        state.rounds.reduce((sum, round) => sum + Number(round[playerIndex] || 0), 0)
+    function activePlayers() {
+      return state.roster.filter(p => p.active);
+    }
+
+    function currentTotals() {
+      const active = activePlayers();
+      return active.map((_, index) =>
+        state.current.rounds.reduce((sum, round) => sum + Number(round[index] || 0), 0)
       );
     }
 
@@ -446,142 +398,341 @@
       return `${n} раундов`;
     }
 
-    function render() {
-      const sums = totals();
-      const max = Math.max(...sums);
-      const leaderIndex = sums.indexOf(max);
+    function esc(value) {
+      return String(value)
+        .replaceAll("&","&amp;").replaceAll("<","&lt;")
+        .replaceAll(">","&gt;").replaceAll('"',"&quot;");
+    }
 
-      $("players").innerHTML = state.players.map((player, index) => `
-        <article class="player ${max > 0 && index === leaderIndex ? "leader" : ""}">
-          ${max > 0 && index === leaderIndex ? '<div class="crown">👑</div>' : ""}
-          <input class="player-name" data-player="${index}" value="${escapeHtml(player.name)}" aria-label="Имя игрока ${index + 1}">
-          <div class="player-score">${sums[index]}</div>
-          <div class="player-meta">${state.rounds.length ? `за ${pluralRounds(state.rounds.length)}` : "пока без очков"}</div>
-        </article>
-      `).join("");
+    function places(totals) {
+      const sorted = [...totals].sort((a,b) => b-a);
+      return totals.map(v => sorted.indexOf(v) + 1);
+    }
+
+    function lastRoundMarks(round) {
+      if (!round) return [];
+      const max = Math.max(...round);
+      return round.map(v => {
+        const marks = [];
+        if (v === 0) marks.push("🧊");
+        if (v === max && max > 0) marks.push("🔥");
+        return marks.join(" ");
+      });
+    }
+
+    function renderGame() {
+      const active = activePlayers();
+      const totals = currentTotals();
+      const rank = places(totals);
+      const max = Math.max(...totals, 0);
+      const leaderIndex = totals.indexOf(max);
+      const last = state.current.rounds.at(-1);
+      const marks = lastRoundMarks(last);
+
+      $("players").innerHTML = active.map((player, i) => {
+        const gap = max - totals[i];
+        const toWin = Math.max(0, state.target - totals[i]);
+        const meta = i === leaderIndex && max > 0
+          ? `${rank[i]} место · лидер · ${toWin} до победы`
+          : `${rank[i]} место · ${gap} до лидера · ${toWin} до победы`;
+        const lastText = last ? `Последний раунд: +${last[i] || 0} ${marks[i] || ""}` : "Пока без раундов";
+
+        return `
+          <article class="player ${i === leaderIndex && max > 0 ? "leader" : ""}" style="--player:${player.color}">
+            ${i === leaderIndex && max > 0 ? '<div class="crown">👑</div>' : ""}
+            <div class="player-head">
+              <div class="avatar">${esc(player.avatar)}</div>
+              <input class="player-name" data-id="${player.id}" value="${esc(player.name)}" aria-label="Имя игрока">
+            </div>
+            <div class="player-score">${totals[i]}</div>
+            <div class="player-meta">${meta}</div>
+            <div class="last-round">${lastText}</div>
+          </article>
+        `;
+      }).join("");
 
       document.querySelectorAll(".player-name").forEach(input => {
-        input.addEventListener("change", event => {
-          const index = Number(event.target.dataset.player);
-          state.players[index].name = event.target.value.trim() || `Игрок ${index + 1}`;
+        input.addEventListener("change", e => {
+          const p = state.roster.find(x => x.id === e.target.dataset.id);
+          if (p) p.name = e.target.value.trim() || "Игрок";
           save();
-          render();
+          renderAll();
         });
       });
 
-      $("roundCount").textContent = pluralRounds(state.rounds.length);
-      $("gameStatus").textContent = state.rounds.length
-        ? `Игра до ${state.target}, раунд ${state.rounds.length + 1}`
+      $("roundCount").textContent = pluralRounds(state.current.rounds.length);
+      $("gameStatus").textContent = state.current.rounds.length
+        ? `Игра до ${state.target}, раунд ${state.current.rounds.length + 1}`
         : `Игра до ${state.target}`;
 
-      if (!state.rounds.length) {
+      if (!state.current.rounds.length) {
         $("roundList").innerHTML = '<div class="empty">Добавь первый раунд, и здесь появится история.</div>';
       } else {
-        $("roundList").innerHTML = state.rounds.map((round, roundIndex) => `
-          <div class="round">
-            <div class="round-title">Раунд ${roundIndex + 1}</div>
-            <div class="round-values" style="--count:${state.players.length}">
-              ${round.map(value => `<div class="round-value">${value}</div>`).join("")}
+        $("roundList").innerHTML = state.current.rounds.map((round, roundIndex) => {
+          const roundMarks = lastRoundMarks(round);
+          return `
+            <div class="round">
+              <div class="round-title">Раунд ${roundIndex + 1}</div>
+              <div class="round-values" style="--count:${active.length}">
+                ${round.map((v, i) => `<div class="round-value">${v}${roundMarks[i] ? ` ${roundMarks[i]}` : ""}</div>`).join("")}
+              </div>
+              <button class="small-btn edit-round" data-round="${roundIndex}" type="button">✏️</button>
             </div>
-            <button class="small-btn edit-round" data-round="${roundIndex}" type="button" aria-label="Изменить раунд ${roundIndex + 1}">✏️</button>
+          `;
+        }).join("");
+
+        document.querySelectorAll(".edit-round").forEach(btn => {
+          btn.addEventListener("click", () => openRound(Number(btn.dataset.round)));
+        });
+      }
+
+      $("undoBtn").disabled = !state.current.rounds.length;
+    }
+
+    function leagueStats() {
+      return state.roster.map(player => {
+        const games = state.history.filter(g => g.players.some(p => p.id === player.id));
+        const wins = games.filter(g => g.winnerId === player.id).length;
+        const allRounds = games.flatMap(g => {
+          const idx = g.players.findIndex(p => p.id === player.id);
+          return idx < 0 ? [] : g.rounds.map(r => Number(r[idx] || 0));
+        });
+        const bestRound = allRounds.length ? Math.max(...allRounds) : 0;
+        const pct = games.length ? wins / games.length * 100 : 0;
+        const averageFinal = games.length
+          ? games.reduce((sum, g) => {
+              const idx = g.players.findIndex(p => p.id === player.id);
+              return sum + Number(g.totals[idx] || 0);
+            }, 0) / games.length
+          : 0;
+        return { player, games: games.length, wins, pct, bestRound, averageFinal };
+      }).sort((a,b) =>
+        b.pct - a.pct ||
+        b.wins - a.wins ||
+        b.games - a.games ||
+        b.averageFinal - a.averageFinal
+      );
+    }
+
+    function renderLeague() {
+      const stats = leagueStats();
+      $("leagueList").innerHTML = stats.map((s, i) => `
+        <div class="league-row">
+          <div class="rank">${["🥇","🥈","🥉"][i] || i + 1}</div>
+          <div>
+            <div class="league-name">${esc(s.player.avatar)} ${esc(s.player.name)}</div>
+            <div class="league-sub">${s.wins} побед · ${s.games} игр · лучший раунд ${s.bestRound}${s.games > 0 && s.games < 3 ? " · предварительно" : ""}</div>
+          </div>
+          <div class="league-pct">${Math.round(s.pct)}%</div>
+          <div class="league-wins">${s.wins}/${s.games}</div>
+        </div>
+      `).join("");
+
+      $("gamesCount").textContent = `${state.history.length} сохранено`;
+
+      if (!state.history.length) {
+        $("historyList").innerHTML = '<div class="empty">Завершённые партии появятся здесь.</div>';
+      } else {
+        $("historyList").innerHTML = [...state.history].reverse().map(game => `
+          <div class="history-card">
+            <button type="button" class="open-history" data-id="${game.id}">
+              <div class="history-title">🏆 ${esc(game.winnerName)} · ${Math.max(...game.totals)} очков</div>
+              <div class="history-meta">${new Date(game.finishedAt).toLocaleString("ru-RU")} · ${pluralRounds(game.rounds.length)}</div>
+            </button>
           </div>
         `).join("");
 
-        document.querySelectorAll(".edit-round").forEach(button => {
-          button.addEventListener("click", () => openRound(Number(button.dataset.round)));
+        document.querySelectorAll(".open-history").forEach(btn => {
+          btn.addEventListener("click", () => openHistory(btn.dataset.id));
         });
       }
     }
 
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+    function renderAll() {
+      renderGame();
+      renderLeague();
     }
 
-    function openRound(roundIndex = null) {
-      editingRound = roundIndex;
-      $("roundDialogTitle").textContent = roundIndex === null ? "Новый раунд" : `Раунд ${roundIndex + 1}`;
+    function openRound(index = null) {
+      const active = activePlayers();
+      if (active.length < 2) {
+        alert("Выбери минимум двух активных игроков в настройках.");
+        return;
+      }
 
-      $("scoreFields").innerHTML = state.players.map((player, index) => {
-        const value = roundIndex === null ? "" : state.rounds[roundIndex][index];
-        return `
-          <div class="score-row">
-            <label for="score-${index}">${escapeHtml(player.name)}</label>
-            <input id="score-${index}" class="score-input" type="number" inputmode="numeric" value="${value}" placeholder="0">
-          </div>
-        `;
-      }).join("");
+      editingRound = index;
+      $("roundDialogTitle").textContent = index === null ? "Новый раунд" : `Раунд ${index + 1}`;
+      $("deleteRoundBtn").style.display = index === null ? "none" : "block";
+
+      $("scoreFields").innerHTML = active.map((p, i) => `
+        <div class="score-row">
+          <label for="score-${i}">${esc(p.avatar)} ${esc(p.name)}</label>
+          <input id="score-${i}" class="score-input" type="number" inputmode="numeric" value="${index === null ? "" : state.current.rounds[index][i]}" placeholder="0">
+        </div>
+      `).join("");
 
       $("roundDialog").showModal();
       setTimeout(() => document.querySelector(".score-input")?.focus(), 50);
     }
 
     function saveRound() {
-      const values = [...document.querySelectorAll(".score-input")].map(input => Number(input.value || 0));
-      if (editingRound === null) state.rounds.push(values);
-      else state.rounds[editingRound] = values;
+      const values = [...document.querySelectorAll(".score-input")].map(i => Number(i.value || 0));
+      if (editingRound === null) state.current.rounds.push(values);
+      else state.current.rounds[editingRound] = values;
 
       save();
       $("roundDialog").close();
-      render();
+      renderAll();
       checkWinner();
     }
 
-    function checkWinner() {
-      const sums = totals();
-      const best = Math.max(...sums);
-      if (best < state.target) return;
+    function deleteRound() {
+      if (editingRound === null) return;
+      state.current.rounds.splice(editingRound, 1);
+      save();
+      $("roundDialog").close();
+      renderAll();
+    }
 
-      const index = sums.indexOf(best);
-      $("winnerName").textContent = state.players[index].name;
-      $("winnerScore").textContent = `${best} очков`;
+    function undoRound() {
+      if (!state.current.rounds.length) return;
+      state.current.rounds.pop();
+      state.current.winnerShown = false;
+      save();
+      renderAll();
+    }
+
+    function checkWinner(force = false) {
+      if (!state.current.rounds.length) return;
+      const totals = currentTotals();
+      const best = Math.max(...totals);
+      if (!force && best < state.target) return;
+      if (!force && state.current.winnerShown) return;
+
+      const idx = totals.indexOf(best);
+      state.current.winnerShown = true;
+      save();
+
+      $("winnerName").textContent = activePlayers()[idx].name;
+      $("winnerScore").textContent = `${best} очков · ${pluralRounds(state.current.rounds.length)}`;
       $("winnerDialog").showModal();
     }
 
-    function applyPlayerCount(count) {
-      while (state.players.length < count) {
-        state.players.push({ name: `Игрок ${state.players.length + 1}` });
-      }
-      state.players = state.players.slice(0, count);
-      state.rounds = state.rounds.map(round => {
-        const next = round.slice(0, count);
-        while (next.length < count) next.push(0);
-        return next;
+    function saveCurrentGame() {
+      if (!state.current.rounds.length) return;
+      const players = activePlayers().map(p => ({ id: p.id, name: p.name, avatar: p.avatar, color: p.color }));
+      const totals = currentTotals();
+      const best = Math.max(...totals);
+      const idx = totals.indexOf(best);
+
+      state.history.push({
+        id: crypto.randomUUID(),
+        finishedAt: new Date().toISOString(),
+        target: state.target,
+        players,
+        rounds: structuredClone(state.current.rounds),
+        totals,
+        winnerId: players[idx].id,
+        winnerName: players[idx].name
       });
+
+      state.current = { rounds: [], winnerShown: false };
+      save();
+      $("winnerDialog").close();
+      renderAll();
+      showScreen("leagueScreen");
     }
 
+    function openSettings() {
+      $("targetScore").value = state.target;
+      $("playerSettings").innerHTML = state.roster.map((p, i) => `
+        <div class="player-settings">
+          <label>
+            <input class="active-toggle" type="checkbox" data-id="${p.id}" ${p.active ? "checked" : ""}>
+          </label>
+          <input class="settings-name" type="text" data-id="${p.id}" value="${esc(p.name)}">
+          <select class="settings-avatar" data-id="${p.id}">
+            ${AVATARS.map(a => `<option value="${a}" ${a === p.avatar ? "selected" : ""}>${a}</option>`).join("")}
+          </select>
+        </div>
+      `).join("");
+      $("settingsDialog").showModal();
+    }
+
+    function applySettings() {
+      document.querySelectorAll(".settings-name").forEach(input => {
+        const p = state.roster.find(x => x.id === input.dataset.id);
+        if (p) p.name = input.value.trim() || "Игрок";
+      });
+      document.querySelectorAll(".settings-avatar").forEach(select => {
+        const p = state.roster.find(x => x.id === select.dataset.id);
+        if (p) p.avatar = select.value;
+      });
+      document.querySelectorAll(".active-toggle").forEach(input => {
+        const p = state.roster.find(x => x.id === input.dataset.id);
+        if (p) p.active = input.checked;
+      });
+
+      if (activePlayers().length < 2) {
+        alert("Нужно минимум два активных игрока.");
+        return;
+      }
+
+      state.target = Math.max(1, Number($("targetScore").value || 200));
+      state.current.rounds = state.current.rounds.map(round => round.slice(0, activePlayers().length));
+      save();
+      $("settingsDialog").close();
+      renderAll();
+    }
+
+    function openHistory(id) {
+      const game = state.history.find(g => g.id === id);
+      if (!game) return;
+      $("historyDialogTitle").textContent = `${game.winnerName}, победа`;
+      $("historyDialogBody").innerHTML = `
+        <div class="history-card">
+          ${game.players.map((p, i) => `
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0">
+              <span>${esc(p.avatar)} ${esc(p.name)}</span>
+              <strong>${game.totals[i]}</strong>
+            </div>
+          `).join("")}
+          <div class="history-meta">${new Date(game.finishedAt).toLocaleString("ru-RU")} · ${pluralRounds(game.rounds.length)}</div>
+        </div>
+      `;
+      $("historyDialog").showModal();
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.toggle("active", s.id === id));
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.screen === id));
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => showScreen(tab.dataset.screen));
+    });
+
+    $("settingsBtn").addEventListener("click", openSettings);
+    $("closeSettingsBtn").addEventListener("click", applySettings);
     $("addRoundBtn").addEventListener("click", () => openRound());
     $("cancelRoundBtn").addEventListener("click", () => $("roundDialog").close());
     $("saveRoundBtn").addEventListener("click", saveRound);
+    $("deleteRoundBtn").addEventListener("click", deleteRound);
+    $("undoBtn").addEventListener("click", undoRound);
+    $("finishBtn").addEventListener("click", () => checkWinner(true));
+    $("continueBtn").addEventListener("click", () => $("winnerDialog").close());
+    $("saveGameBtn").addEventListener("click", saveCurrentGame);
+    $("closeHistoryBtn").addEventListener("click", () => $("historyDialog").close());
 
-    $("settingsBtn").addEventListener("click", () => {
-      $("playerCount").value = String(state.players.length);
-      $("targetScore").value = String(state.target);
-      $("settingsDialog").showModal();
-    });
-
-    $("closeSettingsBtn").addEventListener("click", () => {
-      applyPlayerCount(Number($("playerCount").value));
-      state.target = Math.max(1, Number($("targetScore").value || 200));
+    $("resetAllBtn").addEventListener("click", () => {
+      if (!confirm("Удалить текущую игру, историю и всю статистику?")) return;
+      state = freshState();
       save();
       $("settingsDialog").close();
-      render();
+      renderAll();
     });
 
-    $("newGameBtn").addEventListener("click", () => {
-      if (!confirm("Удалить все раунды и начать новую партию?")) return;
-      state.rounds = [];
-      save();
-      $("settingsDialog").close();
-      render();
-    });
-
-    $("winnerCloseBtn").addEventListener("click", () => $("winnerDialog").close());
-
-    render();
+    renderAll();
 
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
       navigator.serviceWorker.register("./sw.js").catch(() => {});
